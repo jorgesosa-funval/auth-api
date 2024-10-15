@@ -1,5 +1,7 @@
 import { Router } from "express";
-
+import user_router from "./user.routes.js";
+import auth_routes from "./auth.routes.js";
+import validation from "../middlewares/auth.middleware.js";
 const app_router = Router();
 
 /**  
@@ -9,6 +11,8 @@ const app_router = Router();
 */
 function routes(app) {
     app.use("/api/v1", app_router);
+    app_router.use("/users", validation, user_router);
+    app_router.use("/auth", auth_routes);
 }
 
 export default routes;
